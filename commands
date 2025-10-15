@@ -1,0 +1,13 @@
+Get-WinEvent -FilterHashtable @{LogName='Application'; StartTime=(Get-Date).AddDays(-7)} |
+  Where-Object { $_.Message -match '(?i)zoom(.exe)?' -or $_.ProviderName -match 'Application Error|Windows Error Reporting' } |
+  Select TimeCreated, ProviderName, Id, LevelDisplayName, Message -First 50
+
+
+
+Get-WinEvent -FilterHashtable @{LogName='System'; StartTime=(Get-Date).AddHours(-24)} |
+  Where-Object { $_.ProviderName -match 'Kernel-PnP|Microsoft-Windows-UserPnp|USB|DriverFrameworks-UserMode|Service Control Manager' -or $_.Message -match '(?i)usb|bluetooth|driver|failed|error|failed to|disconnect' } |
+  Select TimeCreated, ProviderName, Id, LevelDisplayName, Message -First 80
+
+
+Get-WinEvent -FilterHashtable @{LogName='System'; Id=219; StartTime=(Get-Date).AddDays(-7)} |
+  Select TimeCreated, ProviderName, Id, LevelDisplayName, Message
