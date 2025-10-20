@@ -19,3 +19,14 @@ Get-Process -Name dotnet -ErrorAction SilentlyContinue | ForEach-Object {
         CommandLine = $proc.CommandLine
     }
 }
+
+Get-NetTCPConnection -State Listen |
+    Where-Object { $_.LocalPort -in 80,443,5000,5001 } |
+    ForEach-Object {
+        $proc = Get-Process -Id $_.OwningProcess -ErrorAction SilentlyContinue
+        [PSCustomObject]@{
+            LocalPort = $_.LocalPort
+            OwningProcessId = $_.OwningProcess
+            ProcessName = if ($proc) { $proc.ProcessName } else { "N/A" }
+        }
+    }
