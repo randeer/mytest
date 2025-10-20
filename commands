@@ -1,13 +1,30 @@
-Get-WinEvent -FilterHashtable @{LogName='Application'; StartTime=(Get-Date).AddDays(-7)} |
-  Where-Object { $_.Message -match '(?i)zoom(.exe)?' -or $_.ProviderName -match 'Application Error|Windows Error Reporting' } |
-  Select TimeCreated, ProviderName, Id, LevelDisplayName, Message -First 50
+PS C:\> dotnet --info
 
+Host:
+  Version:      8.0.19
+  Architecture: x64
+  Commit:       fce8ed90dc
+  RID:          win-x64
 
+.NET SDKs installed:
+  No SDKs were found.
 
-Get-WinEvent -FilterHashtable @{LogName='System'; StartTime=(Get-Date).AddHours(-24)} |
-  Where-Object { $_.ProviderName -match 'Kernel-PnP|Microsoft-Windows-UserPnp|USB|DriverFrameworks-UserMode|Service Control Manager' -or $_.Message -match '(?i)usb|bluetooth|driver|failed|error|failed to|disconnect' } |
-  Select TimeCreated, ProviderName, Id, LevelDisplayName, Message -First 80
+.NET runtimes installed:
+  Microsoft.NETCore.App 8.0.19 [C:\ProgramData\CentraStage\AEMAgent\.net.runtime\8.0.19\shared\Microsoft.NETCore.App]
 
+Other architectures found:
+  None
 
-Get-WinEvent -FilterHashtable @{LogName='System'; Id=219; StartTime=(Get-Date).AddDays(-7)} |
-  Select TimeCreated, ProviderName, Id, LevelDisplayName, Message
+Environment variables:
+  DOTNET_ROOT       [C:\ProgramData\CentraStage\AEMAgent\.net.runtime\8.0.19]
+
+global.json file:
+  Not found
+
+Learn more:
+  https://aka.ms/dotnet/info
+
+Download .NET:
+  https://aka.ms/dotnet/download
+PS C:\> dotnet --list-runtimes
+Microsoft.NETCore.App 8.0.19 [C:\ProgramData\CentraStage\AEMAgent\.net.runtime\8.0.19\shared\Microsoft.NETCore.App]
