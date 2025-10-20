@@ -30,3 +30,10 @@ Get-NetTCPConnection -State Listen |
             ProcessName = if ($proc) { $proc.ProcessName } else { "N/A" }
         }
     }
+
+
+# Example search (can be slow)
+Get-ChildItem -Path "C:\Program Files","C:\Program Files (x86)","C:\ProgramData" -Recurse -Force -ErrorAction SilentlyContinue |
+    Where-Object { $_.FullName -match "Microsoft\.AspNetCore\.App" } |
+    Select-Object -First 20 FullName
+
