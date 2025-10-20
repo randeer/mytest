@@ -37,3 +37,74 @@ Get-ChildItem -Path "C:\Program Files","C:\Program Files (x86)","C:\ProgramData"
     Where-Object { $_.FullName -match "Microsoft\.AspNetCore\.App" } |
     Select-Object -First 20 FullName
 
+
+
+
+
+
+
+
+
+
+
+Subject: Findings on CVE-2025-55315 – Datto RMM Agent Runtime Scope
+
+Hi Sam,
+
+We have completed our research regarding CVE-2025-55315, which is associated with ASP.NET Core.
+According to the advisory:
+
+ASP.NET Core versions 2.3.0 up to (but not including) 2.3.6 are vulnerable.
+
+ASP.NET Core versions 8.0.0 up to (but <) 8.0.21 are vulnerable.
+
+ASP.NET Core versions 9.0.0 up to (but <) 9.0.10 are also affected.
+
+The issue primarily impacts the ASP.NET Core runtime, though certain builds of Visual Studio 2022 are also mentioned.
+
+Our Findings
+
+We checked the runtime versions on our STS cloud servers and identified that an ASP.NET Core runtime is running in application scope, associated with the Datto RMM agent.
+It appears this is part of Datto’s internal integration or service communication.
+
+The runtime is located at:
+C:\ProgramData\CentraStage\AEMAgent\.net.runtime\8.0.19\...
+
+This indicates an application-scoped (self-contained or bundled) runtime installation.
+Such runtimes are intentionally stored within the application folder so the program can use that specific version, independent of system-wide installations.
+
+If we attempt to manually upgrade or uninstall this runtime, the Datto RMM agent may fail to start or function correctly. Installing a newer system-wide .NET runtime (e.g., under C:\Program Files\dotnet) will not update or replace the Datto-bundled runtime.
+
+Runtime Update Behaviour
+
+While we cannot confirm Datto’s exact update mechanism, it is likely that the bundled runtime is managed as part of Datto’s own release process.
+In typical application-scoped deployments:
+
+The vendor’s installer or update package replaces or renames the existing .net.runtime folder when a new agent version is released (for example, upgrading from 8.0.19 to 8.0.21 or 9.0.0).
+
+The updated agent then points internally to the new runtime version.
+
+Older runtime folders may be removed or left unused after the upgrade.
+
+Therefore, the runtime update would normally occur only when Datto releases a new version of the RMM agent that includes the patched runtime.
+
+Additional Note
+
+A global .NET runtime (installed under C:\Program Files\dotnet) cannot use or inherit from this application-scoped runtime. Each scope operates independently.
+In other words, a global process cannot use an application-scoped runtime, and vice versa.
+
+Summary:
+
+The detected runtime (8.0.19) is application-scoped and part of the Datto RMM agent.
+
+It cannot be manually patched without risking service failure.
+
+The vulnerability will be resolved once Datto releases an updated agent bundling the fixed runtime (≥ 8.0.21).
+
+No immediate action is required other than monitoring for a new Datto release that includes this patch.
+
+Please let me know if you’d like me to contact Datto Support to confirm their expected update timeline for this issue.
+
+Kind regards,
+
+
