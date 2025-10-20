@@ -1,30 +1,8 @@
-PS C:\> dotnet --info
-
-Host:
-  Version:      8.0.19
-  Architecture: x64
-  Commit:       fce8ed90dc
-  RID:          win-x64
-
-.NET SDKs installed:
-  No SDKs were found.
-
-.NET runtimes installed:
-  Microsoft.NETCore.App 8.0.19 [C:\ProgramData\CentraStage\AEMAgent\.net.runtime\8.0.19\shared\Microsoft.NETCore.App]
-
-Other architectures found:
-  None
-
-Environment variables:
-  DOTNET_ROOT       [C:\ProgramData\CentraStage\AEMAgent\.net.runtime\8.0.19]
-
-global.json file:
-  Not found
-
-Learn more:
-  https://aka.ms/dotnet/info
-
-Download .NET:
-  https://aka.ms/dotnet/download
-PS C:\> dotnet --list-runtimes
-Microsoft.NETCore.App 8.0.19 [C:\ProgramData\CentraStage\AEMAgent\.net.runtime\8.0.19\shared\Microsoft.NETCore.App]
+$runtimeRoot = "C:\ProgramData\CentraStage\AEMAgent\.net.runtime\8.0.19\shared"
+Test-Path "$runtimeRoot\Microsoft.AspNetCore.App" -PathType Container
+# If it exists, list versions:
+If (Test-Path "$runtimeRoot\Microsoft.AspNetCore.App") {
+    Get-ChildItem "$runtimeRoot\Microsoft.AspNetCore.App" | Select-Object Name
+} else {
+    "No Microsoft.AspNetCore.App folder found under $runtimeRoot"
+}
