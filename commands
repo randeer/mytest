@@ -6,3 +6,16 @@ If (Test-Path "$runtimeRoot\Microsoft.AspNetCore.App") {
 } else {
     "No Microsoft.AspNetCore.App folder found under $runtimeRoot"
 }
+
+
+# Modern, reliable method:
+Get-Process -Name dotnet -ErrorAction SilentlyContinue | ForEach-Object {
+    $p = $_
+    $proc = Get-CimInstance Win32_Process -Filter "ProcessId = $($p.Id)"
+    [PSCustomObject]@{
+        Id = $p.Id
+        Name = $p.ProcessName
+        Path = $p.Path
+        CommandLine = $proc.CommandLine
+    }
+}
