@@ -2,3 +2,12 @@ Get-WinEvent -LogName "Microsoft-Windows-GroupPolicy/Operational" | Where-Object
 
 
 Get-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*" | Where-Object { $_.DisplayName -match "Zoom" } | Select-Object DisplayName, InstallSource, InstallLocation, Publisher
+
+
+PS C:\> Get-WinEvent -LogName "Microsoft-Windows-GroupPolicy/Operational" | Where-Object { $_.Message -match "Zoom" } | Select-Object TimeCreated, Message
+PS C:\> Get-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*" | Where-Object { $_.DisplayName -match "Zoom" } | Select-Object DisplayName, InstallSource, InstallLocation, Publisher
+
+DisplayName                 InstallSource                                               InstallLocation Publisher
+-----------                 -------------                                               --------------- ---------
+Zoom Workplace (64-bit)     C:\Program Files (x86)\CyberCNSAgent\patch_agent_temp\                      Zoom
+Zoom VDI Workplace (64-bit) C:\Windows\system32\config\systemprofile\AppData\Local\mdm\                 Zoom Communications, Inc
