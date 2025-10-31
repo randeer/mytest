@@ -1,64 +1,374 @@
-Get-WinEvent -LogName "Microsoft-Windows-GroupPolicy/Operational" | Where-Object { $_.Message -match "Zoom" } | Select-Object TimeCreated, Message
+PS C:\> # Comprehensive search for Zoom installations
+PS C:\> Write-Host "=== Searching for Zoom installations ===" -ForegroundColor Green
+=== Searching for Zoom installations ===
+PS C:\>
+PS C:\> # Check common installation directories
+PS C:\> $zoomPaths = @(
+>>     "$env:ProgramFiles\Zoom",
+>>     "${env:ProgramFiles(x86)}\Zoom",
+>>     "$env:LOCALAPPDATA\Zoom",
+>>     "$env:APPDATA\Zoom",
+>>     "$env:PROGRAMDATA\Zoom"
+>> )
+PS C:\> 
+PS C:\> foreach ($path in $zoomPaths) {
+>>     if (Test-Path $path) {
+>>         Write-Host "FOUND: Zoom in $path" -ForegroundColor Red
+>>         Get-ChildItem $path -Recurse -Depth 1 | Select-Object Name, LastWriteTime | Format-Table
+>>     }
+>> }
+FOUND: Zoom in C:\Program Files\Zoom
+
+Name                                          LastWriteTime
+----                                          -------------
+bin                                           10/27/2025 10:32:07 PM
+resources                                     10/27/2025 10:32:09 PM
+Zoom Workplace (64-bit)                       10/27/2025 10:32:07 PM
+Animojis                                      10/27/2025 10:32:07 PM
+language                                      10/27/2025 10:32:07 PM
+OpenVINO_A                                    10/27/2025 10:32:07 PM
+OpenVINO_B                                    10/27/2025 10:32:07 PM
+pcm                                           10/27/2025 10:32:07 PM
+ringtone                                      10/27/2025 10:32:07 PM
+ZoomOutlookMAPI                               10/27/2025 10:32:05 PM
+airhost.exe                                   10/25/2025 12:49:46 AM
+annoter.dll                                   10/25/2025 12:48:56 AM
+aomagent.dll                                  10/25/2025 12:48:56 AM
+aomhost64.exe                                 10/25/2025 12:49:46 AM
+api-ms-win-core-console-l1-1-0.dll            2/11/2025 10:08:42 AM
+api-ms-win-core-console-l1-2-0.dll            2/11/2025 10:08:42 AM
+api-ms-win-core-datetime-l1-1-0.dll           2/11/2025 10:08:42 AM
+api-ms-win-core-debug-l1-1-0.dll              2/11/2025 10:08:42 AM
+api-ms-win-core-errorhandling-l1-1-0.dll      2/11/2025 10:08:42 AM
+api-ms-win-core-file-l1-1-0.dll               2/11/2025 10:08:42 AM
+api-ms-win-core-file-l1-2-0.dll               2/11/2025 10:08:42 AM
+api-ms-win-core-file-l2-1-0.dll               2/11/2025 10:08:42 AM
+api-ms-win-core-handle-l1-1-0.dll             2/11/2025 10:08:42 AM
+api-ms-win-core-heap-l1-1-0.dll               2/11/2025 10:08:42 AM
+api-ms-win-core-interlocked-l1-1-0.dll        2/11/2025 10:08:42 AM
+api-ms-win-core-libraryloader-l1-1-0.dll      2/11/2025 10:08:42 AM
+api-ms-win-core-localization-l1-2-0.dll       2/11/2025 10:08:42 AM
+api-ms-win-core-memory-l1-1-0.dll             2/11/2025 10:08:42 AM
+api-ms-win-core-namedpipe-l1-1-0.dll          2/11/2025 10:08:42 AM
+api-ms-win-core-processenvironment-l1-1-0.dll 2/11/2025 10:08:42 AM
+api-ms-win-core-processthreads-l1-1-0.dll     2/11/2025 10:08:42 AM
+api-ms-win-core-processthreads-l1-1-1.dll     2/11/2025 10:08:42 AM
+api-ms-win-core-profile-l1-1-0.dll            2/11/2025 10:08:42 AM
+api-ms-win-core-rtlsupport-l1-1-0.dll         2/11/2025 10:08:42 AM
+api-ms-win-core-string-l1-1-0.dll             2/11/2025 10:08:42 AM
+api-ms-win-core-synch-l1-1-0.dll              2/11/2025 10:08:42 AM
+api-ms-win-core-synch-l1-2-0.dll              2/11/2025 10:08:42 AM
+api-ms-win-core-sysinfo-l1-1-0.dll            2/11/2025 10:08:42 AM
+api-ms-win-core-timezone-l1-1-0.dll           2/11/2025 10:08:42 AM
+api-ms-win-core-util-l1-1-0.dll               2/11/2025 10:08:42 AM
+api-ms-win-crt-conio-l1-1-0.dll               2/11/2025 10:08:42 AM
+api-ms-win-crt-convert-l1-1-0.dll             2/11/2025 10:08:42 AM
+api-ms-win-crt-environment-l1-1-0.dll         2/11/2025 10:08:42 AM
+api-ms-win-crt-filesystem-l1-1-0.dll          2/11/2025 10:08:42 AM
+api-ms-win-crt-heap-l1-1-0.dll                2/11/2025 10:08:42 AM
+api-ms-win-crt-locale-l1-1-0.dll              2/11/2025 10:08:42 AM
+api-ms-win-crt-math-l1-1-0.dll                2/11/2025 10:08:42 AM
+api-ms-win-crt-multibyte-l1-1-0.dll           2/11/2025 10:08:42 AM
+api-ms-win-crt-private-l1-1-0.dll             2/11/2025 10:08:42 AM
+api-ms-win-crt-process-l1-1-0.dll             2/11/2025 10:08:42 AM
+api-ms-win-crt-runtime-l1-1-0.dll             2/11/2025 10:08:42 AM
+api-ms-win-crt-stdio-l1-1-0.dll               2/11/2025 10:08:42 AM
+api-ms-win-crt-string-l1-1-0.dll              2/11/2025 10:08:42 AM
+api-ms-win-crt-time-l1-1-0.dll                2/11/2025 10:08:42 AM
+api-ms-win-crt-utility-l1-1-0.dll             2/11/2025 10:08:42 AM
+archival.pcm                                  10/24/2025 11:38:04 PM
+asproxy.dll                                   10/25/2025 12:48:56 AM
+asr_kernel.dll                                10/25/2025 12:48:58 AM
+avcodec_zm-59.dll                             10/25/2025 12:48:58 AM
+avformat_zm-59.dll                            10/25/2025 12:48:58 AM
+avutil_zm-57.dll                              10/25/2025 12:48:58 AM
+cares.dll                                     10/25/2025 12:48:58 AM
+clap-high.pcm                                 10/24/2025 11:38:04 PM
+clap-medium.pcm                               10/24/2025 11:38:04 PM
+clDNN64.dll                                   10/25/2025 12:48:58 AM
+cmmbiz.dll                                    10/25/2025 12:48:58 AM
+CmmBrowserEngine.dll                          10/25/2025 12:48:58 AM
+Cmmlib.dll                                    10/25/2025 12:49:00 AM
+concrt140.dll                                 2/11/2025 10:08:42 AM
+CptControl.exe                                10/25/2025 12:49:46 AM
+CptHost.exe                                   10/25/2025 12:49:46 AM
+CptInstall.exe                                10/25/2025 12:49:46 AM
+CptService.exe                                10/25/2025 12:49:46 AM
+CptShare.dll                                  10/25/2025 12:49:00 AM
+crashrpt_lang.ini                             7/31/2025 11:05:34 AM
+d3dcompiler_47.dll                            8/8/2024 2:42:24 AM
+dingdong.pcm                                  10/24/2025 11:38:04 PM
+dingdong1.pcm                                 10/24/2025 11:38:04 PM
+directui_license.txt                          10/24/2025 11:37:30 PM
+Droplet.pcm                                   10/24/2025 11:38:04 PM
+DuiLib.dll                                    10/25/2025 12:49:00 AM
+duilib_license.txt                            10/24/2025 11:37:30 PM
+dvf.dll                                       10/25/2025 12:49:00 AM
+Embedded.properties                           10/24/2025 11:38:10 PM
+Installer.exe                                 10/25/2025 12:55:22 AM
+leave.pcm                                     10/24/2025 11:38:04 PM
+Lexilla.dll                                   10/25/2025 12:49:00 AM
+libcml.dll                                    10/25/2025 12:49:02 AM
+libcrypto-3-zm.dll                            10/25/2025 12:49:02 AM
+libcurl.dll                                   10/25/2025 12:49:02 AM
+libmagic.dll                                  10/25/2025 12:49:02 AM
+libmpg123.dll                                 10/25/2025 12:49:02 AM
+LibphoneWrapper.dll                           10/25/2025 12:49:02 AM
+libssl-3-zm.dll                               10/25/2025 12:49:02 AM
+MailClient.dll                                10/25/2025 12:49:04 AM
+mcm.dll                                       10/25/2025 12:49:04 AM
+mdnsclient.dll                                10/25/2025 12:49:04 AM
+mDNSResponder.dll                             10/25/2025 12:49:04 AM
+mecab.dll                                     10/25/2025 12:49:04 AM
+meeting_chat_chime.pcm                        10/24/2025 11:38:04 PM
+meeting_raisehand_chime.pcm                   10/24/2025 11:38:04 PM
+mfAdapter.dll                                 10/25/2025 12:49:04 AM
+mkldnn.dll                                    10/25/2025 12:49:04 AM
+msaalib.dll                                   10/25/2025 12:49:06 AM
+msvcp140.dll                                  2/11/2025 10:08:42 AM
+msvcp140_1.dll                                2/11/2025 10:08:42 AM
+msvcp140_2.dll                                2/11/2025 10:08:42 AM
+msvcp140_atomic_wait.dll                      2/11/2025 10:08:42 AM
+msvcp140_codecvt_ids.dll                      2/11/2025 10:08:42 AM
+mute.pcm                                      10/24/2025 11:38:04 PM
+nanosvg_LICENSE.txt                           10/24/2025 11:38:06 PM
+nydus.dll                                     10/25/2025 12:49:06 AM
+onnxruntime_asr.dll                           11/20/2024 12:26:22 AM
+percussion.pcm                                10/24/2025 11:38:04 PM
+percussion_pause.pcm                          10/24/2025 11:38:04 PM
+record_start.pcm                              10/24/2025 11:38:04 PM
+record_stop.pcm                               10/24/2025 11:38:04 PM
+reslib.dll                                    10/25/2025 12:49:06 AM
+ring.pcm                                      10/24/2025 11:38:04 PM
+ring_spatial.pcm                              10/24/2025 11:38:04 PM
+ryzen_ai_vart.dll                             10/25/2025 12:49:06 AM
+Scintilla.dll                                 10/25/2025 12:49:06 AM
+sipphone_audioctrl.dll                        10/25/2025 12:49:08 AM
+sipphone_util.dll                             10/25/2025 12:49:08 AM
+SpacesClient.dll                              10/25/2025 12:49:08 AM
+ssb_sdk.dll                                   10/25/2025 12:49:08 AM
+swresample_zm-4.dll                           10/25/2025 12:49:08 AM
+swscale_zm-6.dll                              10/25/2025 12:49:08 AM
+thulac.dll                                    10/25/2025 12:49:10 AM
+tp.dll                                        10/25/2025 12:49:10 AM
+turbojpeg.dll                                 10/25/2025 12:49:10 AM
+ucrtbase.dll                                  2/11/2025 10:08:42 AM
+UIBase.dll                                    10/25/2025 12:49:10 AM
+unmute.pcm                                    10/24/2025 11:38:04 PM
+util.dll                                      10/25/2025 12:49:10 AM
+vccorlib140.dll                               2/11/2025 10:08:42 AM
+vcruntime140.dll                              2/11/2025 10:08:42 AM
+vcruntime140_1.dll                            2/11/2025 10:08:42 AM
+viper.dll                                     10/25/2025 12:49:10 AM
+viperex.dll                                   10/25/2025 12:49:12 AM
+viper_async_device.dll                        10/25/2025 12:49:12 AM
+WebView2Loader.dll                            6/23/2025 10:22:38 AM
+wr_ding.pcm                                   10/24/2025 11:38:04 PM
+XmppDll.dll                                   10/25/2025 12:49:12 AM
+zApp.dll                                      10/25/2025 12:49:12 AM
+zAppRes.dll                                   10/25/2025 12:49:12 AM
+zAppUI.dll                                    10/25/2025 12:49:12 AM
+zAssistant.dll                                10/25/2025 12:49:12 AM
+zAutoUpdate.dll                               10/25/2025 12:49:14 AM
+zbt.dll                                       10/25/2025 12:49:14 AM
+zBusinessUIComponent.dll                      10/25/2025 12:49:14 AM
+zCalendarRes.dll                              10/25/2025 12:49:14 AM
+zCalendarUI.dll                               10/25/2025 12:49:14 AM
+zCCIMeeting.dll                               10/25/2025 12:49:14 AM
+zCCIUI.dll                                    10/25/2025 12:49:14 AM
+zCCIVideo.dll                                 10/25/2025 12:49:14 AM
+zChatJSRes.dll                                10/25/2025 12:49:16 AM
+zChatUI.dll                                   10/25/2025 12:49:16 AM
+zCommonChat.dll                               10/25/2025 12:49:16 AM
+zContext.dll                                  10/25/2025 12:49:16 AM
+zContinuityMedia.dll                          10/25/2025 12:49:16 AM
+zCrashReport.exe                              10/25/2025 12:49:48 AM
+zCrashReport64.dll                            10/25/2025 12:49:16 AM
+zCrashReport64.exe                            10/25/2025 12:49:48 AM
+zCustomizeMeetingUI.dll                       10/25/2025 12:49:16 AM
+zData.dll                                     10/25/2025 12:49:18 AM
+zDiagnostic.dll                               10/25/2025 12:49:18 AM
+zEventTracker.dll                             10/25/2025 12:49:18 AM
+zHuddlesApp.dll                               10/25/2025 12:49:18 AM
+zHybridSDK.dll                                10/25/2025 12:49:18 AM
+zHybridSDKHost.dll                            10/25/2025 12:49:18 AM
+zKBCrypto.dll                                 10/25/2025 12:49:18 AM
+zLooper.dll                                   10/25/2025 12:49:20 AM
+zlt.dll                                       10/25/2025 12:49:20 AM
+zMailRes.dll                                  10/25/2025 12:49:20 AM
+zMailUI.dll                                   10/25/2025 12:49:20 AM
+zmb.dll                                       10/25/2025 12:49:20 AM
+zMcmService.dll                               10/25/2025 12:49:20 AM
+ZMDB.dll                                      10/25/2025 12:49:20 AM
+zMeshNetAgent.dll                             10/25/2025 12:49:20 AM
+zmp.dll                                       10/25/2025 12:49:22 AM
+zmScheduler.dll                               10/25/2025 12:49:22 AM
+zMsgApp.dll                                   10/25/2025 12:49:22 AM
+zMsgAppCommon.dll                             10/25/2025 12:49:22 AM
+zm_conf_universal_ui.dll                      10/25/2025 12:49:22 AM
+zNet.dll                                      10/25/2025 12:49:22 AM
+zNetDiagnostic.dll                            10/25/2025 12:49:22 AM
+zNetUtils.dll                                 10/25/2025 12:49:24 AM
+Zoom.exe                                      10/25/2025 12:49:48 AM
+zoombase_crypto_shared.dll                    10/25/2025 12:49:24 AM
+ZoomDocConverter.exe                          10/25/2025 12:49:48 AM
+ZoomHybridConf.exe                            10/25/2025 12:49:50 AM
+ZoomOutlookIMPlugin.exe                       10/25/2025 12:49:50 AM
+ZoomTask.dll                                  10/25/2025 12:49:24 AM
+ZoomTelemetry.dll                             10/25/2025 12:49:24 AM
+Zoom_launcher.exe                             10/25/2025 12:49:50 AM
+zoom_meeting_bridge.dll                       10/25/2025 12:49:24 AM
+zOutlookIMUtil.dll                            10/25/2025 12:49:24 AM
+zPhoneRes.dll                                 10/25/2025 12:49:24 AM
+zPhoneUI.dll                                  10/25/2025 12:49:26 AM
+zPreMeetingApp.dll                            10/25/2025 12:49:26 AM
+zPSApp.dll                                    10/25/2025 12:49:26 AM
+zPSUI.dll                                     10/25/2025 12:49:26 AM
+zPTApp.dll                                    10/25/2025 12:49:26 AM
+zPTKBCrypto.dll                               10/25/2025 12:49:26 AM
+zSettingUI.dll                                10/25/2025 12:49:26 AM
+zSipCallApp.dll                               10/25/2025 12:49:28 AM
+zSipCallCommon.dll                            10/25/2025 12:49:28 AM
+zSipCallCommonBase.dll                        10/25/2025 12:49:28 AM
+zSipcallRes.dll                               10/25/2025 12:49:28 AM
+zSipcallUI.dll                                10/25/2025 12:49:28 AM
+zSIPSDK.dll                                   10/25/2025 12:49:28 AM
+zSpacesUI.dll                                 10/25/2025 12:49:28 AM
+zTelemetryBiz.dll                             10/25/2025 12:49:30 AM
+zToolSuiteIPCHost.dll                         10/25/2025 12:49:30 AM
+zTscoder.exe                                  10/25/2025 12:49:50 AM
+ZUI.dll                                       10/25/2025 12:49:30 AM
+zUIClient.dll                                 10/25/2025 12:49:30 AM
+zUIRes.dll                                    10/25/2025 12:49:30 AM
+zUnifyWebView.dll                             10/25/2025 12:49:30 AM
+zUpdater.exe                                  10/25/2025 12:49:50 AM
+zVideoApp.dll                                 10/25/2025 12:49:30 AM
+zVideoUI.dll                                  10/25/2025 12:49:32 AM
+zWBUI.dll                                     10/25/2025 12:49:32 AM
+zWBUIRes.dll                                  10/25/2025 12:49:32 AM
+zWebService.dll                               10/25/2025 12:49:32 AM
+zWebview2Agent.exe                            10/25/2025 12:49:52 AM
+zWinRes.dll                                   10/25/2025 12:49:32 AM
+zzhost.dll                                    10/25/2025 12:49:32 AM
+ZZHostIPCSDK.dll                              10/25/2025 12:49:32 AM
+Emojis                                        10/27/2025 10:32:11 PM
+emoji-categories.json                         10/27/2025 10:32:09 PM
+emoji.json                                    10/27/2025 10:32:09 PM
+emoji.version                                 10/27/2025 10:32:09 PM
+emojione_low.7z                               10/24/2025 11:38:08 PM
+CustomAction.dll                              10/25/2025 12:56:56 AM
 
 
-Get-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*" | Where-Object { $_.DisplayName -match "Zoom" } | Select-Object DisplayName, InstallSource, InstallLocation, Publisher
+FOUND: Zoom in C:\Program Files (x86)\Zoom
+
+Name                                          LastWriteTime        
+----                                          -------------
+Zoom Outlook Plugin                           10/31/2025 1:03:30 PM
+x64                                           10/31/2025 1:03:30 PM
+api-ms-win-core-console-l1-1-0.dll            2/11/2025 11:08:42 AM
+api-ms-win-core-console-l1-2-0.dll            2/11/2025 11:08:42 AM
+api-ms-win-core-datetime-l1-1-0.dll           2/11/2025 11:08:42 AM
+api-ms-win-core-debug-l1-1-0.dll              2/11/2025 11:08:42 AM
+api-ms-win-core-errorhandling-l1-1-0.dll      2/11/2025 11:08:42 AM
+api-ms-win-core-file-l1-1-0.dll               2/11/2025 11:08:42 AM
+api-ms-win-core-file-l1-2-0.dll               2/11/2025 11:08:42 AM
+api-ms-win-core-file-l2-1-0.dll               2/11/2025 11:08:42 AM
+api-ms-win-core-handle-l1-1-0.dll             2/11/2025 11:08:42 AM
+api-ms-win-core-heap-l1-1-0.dll               2/11/2025 11:08:42 AM
+api-ms-win-core-interlocked-l1-1-0.dll        2/11/2025 11:08:42 AM
+api-ms-win-core-libraryloader-l1-1-0.dll      2/11/2025 11:08:42 AM
+api-ms-win-core-localization-l1-2-0.dll       2/11/2025 11:08:42 AM
+api-ms-win-core-memory-l1-1-0.dll             2/11/2025 11:08:42 AM
+api-ms-win-core-namedpipe-l1-1-0.dll          2/11/2025 11:08:42 AM
+api-ms-win-core-processenvironment-l1-1-0.dll 2/11/2025 11:08:42 AM
+api-ms-win-core-processthreads-l1-1-0.dll     2/11/2025 11:08:42 AM
+api-ms-win-core-processthreads-l1-1-1.dll     2/11/2025 11:08:42 AM
+api-ms-win-core-profile-l1-1-0.dll            2/11/2025 11:08:42 AM
+api-ms-win-core-rtlsupport-l1-1-0.dll         2/11/2025 11:08:42 AM
+api-ms-win-core-string-l1-1-0.dll             2/11/2025 11:08:42 AM
+api-ms-win-core-synch-l1-1-0.dll              2/11/2025 11:08:42 AM
+api-ms-win-core-synch-l1-2-0.dll              2/11/2025 11:08:42 AM
+api-ms-win-core-sysinfo-l1-1-0.dll            2/11/2025 11:08:42 AM
+api-ms-win-core-timezone-l1-1-0.dll           2/11/2025 11:08:42 AM
+api-ms-win-core-util-l1-1-0.dll               2/11/2025 11:08:42 AM
+API-MS-Win-core-xstate-l2-1-0.dll             2/11/2025 11:08:42 AM
+api-ms-win-crt-conio-l1-1-0.dll               2/11/2025 11:08:42 AM
+api-ms-win-crt-convert-l1-1-0.dll             2/11/2025 11:08:42 AM
+api-ms-win-crt-environment-l1-1-0.dll         2/11/2025 11:08:42 AM
+api-ms-win-crt-filesystem-l1-1-0.dll          2/11/2025 11:08:42 AM
+api-ms-win-crt-heap-l1-1-0.dll                2/11/2025 11:08:42 AM
+api-ms-win-crt-locale-l1-1-0.dll              2/11/2025 11:08:42 AM
+api-ms-win-crt-math-l1-1-0.dll                2/11/2025 11:08:42 AM
+api-ms-win-crt-multibyte-l1-1-0.dll           2/11/2025 11:08:42 AM
+api-ms-win-crt-private-l1-1-0.dll             2/11/2025 11:08:42 AM
+api-ms-win-crt-process-l1-1-0.dll             2/11/2025 11:08:42 AM
+api-ms-win-crt-runtime-l1-1-0.dll             2/11/2025 11:08:42 AM
+api-ms-win-crt-stdio-l1-1-0.dll               2/11/2025 11:08:42 AM
+api-ms-win-crt-string-l1-1-0.dll              2/11/2025 11:08:42 AM
+api-ms-win-crt-time-l1-1-0.dll                2/11/2025 11:08:42 AM
+api-ms-win-crt-utility-l1-1-0.dll             2/11/2025 11:08:42 AM
+Cmmlib.dll                                    5/30/2025 4:53:24 AM
+concrt140.dll                                 2/11/2025 11:08:42 AM
+CustomAction.dll                              5/30/2025 4:53:26 AM
+directui_license.txt                          5/30/2025 4:38:48 AM
+DuiLib.dll                                    5/30/2025 4:53:26 AM
+duilib_license.txt                            5/30/2025 4:38:48 AM
+libcrypto-3-zm.dll                            5/30/2025 4:53:26 AM
+msvcp140.dll                                  2/11/2025 11:08:42 AM
+msvcp140_1.dll                                2/11/2025 11:08:42 AM
+msvcp140_2.dll                                2/11/2025 11:08:42 AM
+msvcp140_codecvt_ids.dll                      2/11/2025 11:08:42 AM
+plugin_Launcher.exe                           5/30/2025 4:53:44 AM
+reslib.dll                                    5/30/2025 4:53:26 AM
+ucrtbase.dll                                  2/11/2025 11:08:42 AM
+util.dll                                      5/30/2025 4:53:28 AM
+vccorlib140.dll                               2/11/2025 11:08:42 AM
+vcruntime140.dll                              2/11/2025 11:08:42 AM
+zContext.dll                                  5/30/2025 4:53:28 AM
+zLooper.dll                                   5/30/2025 4:53:28 AM
+ZoomOutlookPlugin.dll                         5/30/2025 4:53:28 AM
+ZoomTask.dll                                  5/30/2025 4:53:28 AM
+zoprc.dll                                     5/30/2025 4:53:28 AM
+zScheduler.dll                                5/30/2025 4:53:28 AM
 
 
-PS C:\> Get-WinEvent -LogName "Microsoft-Windows-GroupPolicy/Operational" | Where-Object { $_.Message -match "Zoom" } | Select-Object TimeCreated, Message
-PS C:\> Get-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*" | Where-Object { $_.DisplayName -match "Zoom" } | Select-Object DisplayName, InstallSource, InstallLocation, Publisher
+PS C:\>
+PS C:\> # Check registry for Zoom installations
+PS C:\> Write-Host "`n=== Checking Registry for Zoom ===" -ForegroundColor Green
 
-DisplayName                 InstallSource                                               InstallLocation Publisher
------------                 -------------                                               --------------- ---------
-Zoom Workplace (64-bit)     C:\Program Files (x86)\CyberCNSAgent\patch_agent_temp\                      Zoom
-Zoom VDI Workplace (64-bit) C:\Windows\system32\config\systemprofile\AppData\Local\mdm\                 Zoom Communications, Inc
-
-
-
-# Check for Group Policy software installation events (Event ID 1033)
-Get-WinEvent -LogName Application -FilterXPath "*[System[EventID=1033]]" | 
-    Where-Object {$_.Message -like "*Zoom*"} | 
-    Format-List TimeCreated, Id, Message
-
-# More comprehensive search for any MSI installer events related to Zoom
-Get-WinEvent -LogName Application | 
-    Where-Object { $_.Id -in (1033, 1034, 11707, 11724) -and $_.Message -like "*Zoom*" } |
-    Select-Object TimeCreated, Id, LevelDisplayName, Message
-
-
+=== Checking Registry for Zoom ===
+PS C:\> $registryPaths = @(
+>>     "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*",
+>>     "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*",
+>>     "HKLM:\SOFTWARE\Zoom",
+>>     "HKCU:\SOFTWARE\Zoom"
+>> )
+PS C:\> 
+PS C:\> foreach ($regPath in $registryPaths) {
+>>     if (Test-Path $regPath) {
+>>         Get-ItemProperty $regPath -ErrorAction SilentlyContinue |
+>>             Where-Object { $_.PSChildName -like "*Zoom*" -or $_.DisplayName -like "*Zoom*" } |
+>>             Select-Object DisplayName, Publisher, InstallDate, DisplayVersion, PSPath
+>>     }
+>> }
 
 
-# Comprehensive search for Zoom installations
-Write-Host "=== Searching for Zoom installations ===" -ForegroundColor Green
+DisplayName    : Zoom Workplace (64-bit)
+Publisher      : Zoom
+InstallDate    : 20251027
+DisplayVersion : 6.6.19875
+PSPath         : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{02C66221-FD17-4EC2-9CEF-8CBDBF2EBCB5}
 
-# Check common installation directories
-$zoomPaths = @(
-    "$env:ProgramFiles\Zoom",
-    "${env:ProgramFiles(x86)}\Zoom",
-    "$env:LOCALAPPDATA\Zoom",
-    "$env:APPDATA\Zoom",
-    "$env:PROGRAMDATA\Zoom"
-)
+DisplayName    : Zoom VDI Workplace (64-bit)
+Publisher      : Zoom Communications, Inc.
+InstallDate    : 20251030
+DisplayVersion : 6.4.26150
+PSPath         : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{7210400F-B412-4CD0-BFFD-B9A8555E780E}
 
-foreach ($path in $zoomPaths) {
-    if (Test-Path $path) {
-        Write-Host "FOUND: Zoom in $path" -ForegroundColor Red
-        Get-ChildItem $path -Recurse -Depth 1 | Select-Object Name, LastWriteTime | Format-Table
-    }
-}
+DisplayName    : Zoom Outlook Plugin
+Publisher      : Zoom
+InstallDate    : 20251031
+DisplayVersion : 6.4.10
+PSPath         : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{03BB2469-6E57-4F4D-B362-42A54192D9ED}
 
-# Check registry for Zoom installations
-Write-Host "`n=== Checking Registry for Zoom ===" -ForegroundColor Green
-$registryPaths = @(
-    "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*",
-    "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*",
-    "HKLM:\SOFTWARE\Zoom",
-    "HKCU:\SOFTWARE\Zoom"
-)
 
-foreach ($regPath in $registryPaths) {
-    if (Test-Path $regPath) {
-        Get-ItemProperty $regPath -ErrorAction SilentlyContinue | 
-            Where-Object { $_.PSChildName -like "*Zoom*" -or $_.DisplayName -like "*Zoom*" } |
-            Select-Object DisplayName, Publisher, InstallDate, DisplayVersion, PSPath
-    }
-}
