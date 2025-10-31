@@ -11,3 +11,15 @@ DisplayName                 InstallSource                                       
 -----------                 -------------                                               --------------- ---------
 Zoom Workplace (64-bit)     C:\Program Files (x86)\CyberCNSAgent\patch_agent_temp\                      Zoom
 Zoom VDI Workplace (64-bit) C:\Windows\system32\config\systemprofile\AppData\Local\mdm\                 Zoom Communications, Inc
+
+
+
+# Check for Group Policy software installation events (Event ID 1033)
+Get-WinEvent -LogName Application -FilterXPath "*[System[EventID=1033]]" | 
+    Where-Object {$_.Message -like "*Zoom*"} | 
+    Format-List TimeCreated, Id, Message
+
+# More comprehensive search for any MSI installer events related to Zoom
+Get-WinEvent -LogName Application | 
+    Where-Object { $_.Id -in (1033, 1034, 11707, 11724) -and $_.Message -like "*Zoom*" } |
+    Select-Object TimeCreated, Id, LevelDisplayName, Message
