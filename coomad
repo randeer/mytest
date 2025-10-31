@@ -23,3 +23,42 @@ Get-WinEvent -LogName Application -FilterXPath "*[System[EventID=1033]]" |
 Get-WinEvent -LogName Application | 
     Where-Object { $_.Id -in (1033, 1034, 11707, 11724) -and $_.Message -like "*Zoom*" } |
     Select-Object TimeCreated, Id, LevelDisplayName, Message
+
+
+
+
+# Comprehensive search for Zoom installations
+Write-Host "=== Searching for Zoom installations ===" -ForegroundColor Green
+
+# Check common installation directories
+$zoomPaths = @(
+    "$env:ProgramFiles\Zoom",
+    "${env:ProgramFiles(x86)}\Zoom",
+    "$env:LOCALAPPDATA\Zoom",
+    "$env:APPDATA\Zoom",
+    "$env:PROGRAMDATA\Zoom"
+)
+
+foreach ($path in $zoomPaths) {
+    if (Test-Path $path) {
+        Write-Host "FOUND: Zoom in $path" -ForegroundColor Red
+        Get-ChildItem $path -Recurse -Depth 1 | Select-Object Name, LastWriteTime | Format-Table
+    }
+}
+
+# Check registry for Zoom installations
+Write-Host "`n=== Checking Registry for Zoom ===" -ForegroundColor Green
+$registryPaths = @(
+    "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*",
+    "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*",
+    "HKLM:\SOFTWARE\Zoom",
+    "HKCU:\SOFTWARE\Zoom"
+)
+
+foreach ($regPath in $registryPaths) {
+    if (Test-Path $regPath) {
+        Get-ItemProperty $regPath -ErrorAction SilentlyContinue | 
+            Where-Object { $_.PSChildName -like "*Zoom*" -or $_.DisplayName -like "*Zoom*" } |
+            Select-Object DisplayName, Publisher, InstallDate, DisplayVersion, PSPath
+    }
+}
