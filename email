@@ -13,6 +13,14 @@ From the outset, the intention was not to rush the final decommissioning of DC-0
 
 At the time, the agreed approach was to pause final decommissioning until those broader environment checks and confirmations were completed, which is why DC-03 has remained in a limited, monitored state rather than being fully removed.
 
+Outstanding / in-progress items identified:
+
+Final verification that all services are referencing BCHM-LA-DC01 (including DHCP scope options, DNS entries, VPN configurations, and any external integrations)
+Fully stopping and preventing DHCP services from restarting on DC-03
+Removing DC-03 from Datto RMM patching and monitoring groups
+Identifying and validating any third-party or external dependencies still referencing DC-03
+Formal decommissioning and archival of DC-03 once QA/QC is confirmed
+
 Next steps (immediate):
 Perform a full dependency review across the environment to identify any remaining references to DC-03
 Validate VPN, authentication, and network services against BCHM-LA-DC01
