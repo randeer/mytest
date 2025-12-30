@@ -1,0 +1,22 @@
+Hi Sam,
+
+I want to provide clear context on where things stand with the DC-03 replacement and outline the immediate next steps
+
+Following the instability of DC-03 and the Datto restore concerns, we proceeded with deploying a new domain controller (BCHM-LA-DC01) to ensure service continuity. Since then, the following has been completed:
+
+Deployment of BCHM-LA-DC01
+DNS replication validated between DC-03 and BCHM-LA-DC01
+DHCP migrated to BCHM-LA-DC01 and disabled on DC-03
+Initial monitoring and stability checks implemented prior to decommissioning
+
+From the outset, the intention was not to rush the final decommissioning of DC-03 until a full dependency review was completed. This concern was raised early and tracked in Ninety, and I have been regularly flagging it during our weekly discussions to ensure we don’t miss any legacy or third-party dependencies (VPNs, authentication services, custom DNS entries, etc.), especially as there was no documentation available in Hudu to validate these items.
+
+At the time, the agreed approach was to pause final decommissioning until those broader environment checks and confirmations were completed, which is why DC-03 has remained in a limited, monitored state rather than being fully removed.
+
+Next steps (immediate):
+Perform a full dependency review across the environment to identify any remaining references to DC-03
+Validate VPN, authentication, and network services against BCHM-LA-DC01
+Confirm DHCP and DNS configurations are fully aligned
+Proceed with formal decommissioning of DC-03 once verification is complete
+
+I agree that this needs to be fully closed out. All server-side work and validations within my scope have been completed. The remaining item is confirmation of any additional services or configurations outside the core server environment that may still reference DC-03. This confirmation is required before final validation and decommissioning can proceed, and this is what we continuously raised during weekly meetings. Once that confirmation is received and the checks are completed, a final update will be provided.
