@@ -28,3 +28,5 @@ Confirm DHCP and DNS configurations are fully aligned
 Proceed with formal decommissioning of DC-03 once verification is complete
 
 I agree that this needs to be fully closed out. All server-side work and validations within my scope have been completed. The remaining item is confirmation of any additional services or configurations outside the core server environment that may still reference DC-03. This confirmation is required before final validation and decommissioning can proceed, and this is what we continuously raised during weekly meetings. Once that confirmation is received and the checks are completed, a final update will be provided.
+
+Please let me know if there are any additional checks you want included beyond the above.
