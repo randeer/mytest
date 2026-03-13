@@ -1,6 +1,6 @@
-<ol>
-## <li>Git Overview</li>
-</ol>
+
+## 1. Git Overview
+
 <p>Git is a distributed version control system used to track changes in source code and enable multiple developers to collaborate on the same project safely.
 Instead of storing files directly, Git records snapshots of changes over time. This allows developers to review history, revert changes, and work on new features without affecting the main project.</p>
 
