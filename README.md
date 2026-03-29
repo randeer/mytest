@@ -28,6 +28,8 @@ The example below uses a sample repository called sample-app.
 **1. Clone the Repository**
 Cloning creates a local copy of the remote repository.
 
+Email
+
 *Command:*
 ```bash
 `git clone https://github.com/example/sample-app.git`
