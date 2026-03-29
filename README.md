@@ -1,45 +1,145 @@
+🔄 4. Working with Repositories (ICELOGS-LOGSMOVER)
 
-## 1. Git Overview
+This section explains how to create branches, make changes, and merge code using our standard workflow.
 
-<p>Git is a distributed version control system used to track changes in source code and enable multiple developers to collaborate on the same project safely.
-Instead of storing files directly, Git records snapshots of changes over time. This allows developers to review history, revert changes, and work on new features without affecting the main project.</p>
+Repository: intcx/ICELOGS-LOGSMOVER.logsmover
 
-#### Key Concepts
-**Repository (Repo)** - A repository is a project tracked by Git. It contains the project files and the full history of changes.
+🌿 4.1 Branch Creation and Naming
 
-**Local Repository** - The copy of the repository stored on a developer’s computer. Developers make changes, commits, and branches locally before sharing them.
+👉 Always create a new branch before making changes
+❌ Do NOT work directly on master/main
 
-**Remote Repository** - A repository hosted on a server (such as Bitbucket or GitHub) that allows teams to share and collaborate on code.
+Step 1: Get Latest Code
+What this does: Ensures your branch is based on the latest version
 
-**Commit** - A commit records a snapshot of changes in the repository. Each commit has a unique ID and includes information about what was changed.
+git checkout master
+git pull origin master
 
-**Branch** - A branch is an independent line of development. Developers create branches to work on features or bug fixes without affecting the main branch.
+Step 2: Create a New Branch
+What this does: Creates an isolated workspace for your changes
 
-**Clone** - Cloning creates a copy of a remote repository on a local machine so developers can start working on the project.
+git checkout -b TKT12345678
 
-**Pull** - Pulling retrieves the latest changes from the remote repository and updates the local repository.
+✅ Naming Convention;
+Ticket number is mandatory
+Description is optional but recommended for clarity
+Use ticket-based naming:
 
-**Push** - Pushing sends local commits to the remote repository so other team members can access them.
+TKT12345678_log_cleanup_update
+TKT59198868_fix_auth_issue
+TKT62660039_env_changes
 
-## 2. Git Workflow
-This section describes the standard workflow developers should follow when working with Git.
-The example below uses a sample repository called sample-app.
+✏️ 4.2 Making Changes and Commits
+Step 1: Check Changes
+What this does: Shows modified and new files
+git status
 
-**1. Clone the Repository**
-Cloning creates a local copy of the remote repository.
+Step 2: Stage Files
+What this does: Prepares files for commit
+git add .
 
-Email
+Step 3: Commit Changes
+What this does: Saves a snapshot of your changes
+git commit -m "Update log cleanup script for environment handling"
 
-*Command:*
-```bash
-`git clone https://github.com/example/sample-app.git`
-```
+🚀 4.3 Push Code to Remote
+What this does: Uploads your branch to remote repository
+git push origin TKT12345678
 
-*Example Output:*
-```bash
-Cloning into 'sample-app'...
-remote: Enumerating objects: 25, done.
-remote: Counting objects: 100% (25/25), done.
-Receiving objects: 100% (25/25), done.
-Resolving deltas: 100% (8/8), done.
-```
+👉 First time only:
+git push -u origin TKT12345678
+
+🔁 4.4 Create Pull Request (PR)
+👉 All changes must go through PR (no direct push to master)
+
+Steps:
+Go to GitHub or Bitbucket
+Click Create Pull Request
+
+Select:
+Source branch: TKT12345678 (Ticket No)
+Target branch: master
+
+Optional
+Add:
+Title: Short summary
+Description: What was changed and why
+Reviewers: Team lead / peers
+
+🔐 4.5 Pull Request (PR) Review Process
+What this does: Ensures all changes are reviewed and approved before merging into master
+
+👥 Step 1: Assign Reviewers
+Add reviewers in GitHub or Bitbucket
+Typically: Team lead or peers
+💬 Step 2: Address Review Comments
+
+If reviewers request changes:
+
+What this does: Updates your existing branch with fixes
+
+git status
+git add .
+git commit -m "Fix review comments for log cleanup script"
+git push
+
+👉 No need to create a new PR
+👉 PR updates automatically after push
+
+🔄 (Optional but Recommended) Sync with Latest Master
+What this does: Reduces chances of merge conflicts
+
+git fetch origin
+git pull origin master
+
+🔀 4.6 Merge Changes
+What this does: Merges your approved changes into master
+
+✅ Recommended: Squash and Merge (UI)
+Combines all commits into one clean commit
+Keeps history simple
+👉 Done via GitHub / Bitbucket UI
+
+🖥️ (Optional) Merge via Command Line
+If needed (advanced / fallback):
+
+Step 1: Switch to master
+git checkout master
+
+Step 2: Pull latest changes
+git pull origin master
+
+Step 3: Merge your branch
+git merge TKT12345678
+
+Other Merge Options
+Rebase
+git checkout TKT12345678
+git rebase master
+
+🧹 After Merge (Clean Up)
+Delete Local Branch
+
+What this does: Removes branch from your machine
+git branch -d TKT12345678
+
+👉 If not merged (force delete):
+git branch -D TKT12345678
+
+Delete Remote Branch
+What this does: Removes branch from remote repository
+
+git push origin --delete TKT12345678
+
+Clean Up Local References
+What this does: Removes deleted remote branches from local list
+git fetch --prune
+
+🔄 4.7 Sync Local Repository After Merge
+What this does: Updates your local repo with latest changes
+
+Step 1: Switch to Master
+git checkout master
+
+Step 2: Pull Latest Changes
+git pull origin master
