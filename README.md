@@ -1,3 +1,75 @@
+🔐 Clone a Repository
+
+Option 1: Clone using SSH (Recommended)
+What this does:
+Uses your SSH key to securely connect without entering credentials every time.
+
+Command:
+git clone git@github.com:intcx/ICELOGS-LOGSMOVER.logsmover.git
+
+
+Option 2: Clone using HTTPS
+What this does:
+Downloads the repo using a URL. You will need to authenticate.
+
+GitHub requires secure login when using HTTPS.
+Enter your GitHub username
+Use a Personal Access Token (PAT) instead of password
+
+Command:
+git clone https://github.com/intcx/ICELOGS-LOGSMOVER.logsmover.git
+
+
+🔑 How to Create a Personal Access Token (PAT)
+
+1) Go to GitHub Settings
+Log in to GitHub
+Click your profile icon (top right)
+Select Settings
+
+2) Open Developer Settings
+Scroll down (left sidebar)
+Click Developer settings
+
+3) Select Personal Access Tokens
+Click Personal access tokens
+Choose:
+Tokens (classic) (most commonly used)
+
+4) Generate New Token
+Click Generate new token (classic)
+5) Configure the Token
+
+Fill in:
+Note → e.g. Git access token
+Expiration → choose (e.g. 30 or 90 days)
+Scopes → select:
+✅ repo (for private repositories)
+✅ read:org (optional, if needed)
+
+6) Generate & Copy Token
+Click Generate token
+⚠️ IMPORTANT: Copy it immediately
+(You won’t see it again!)
+
+If you don’t want to enter PAT every time:
+git config --global credential.helper store
+
+
+📂 After Cloning
+Navigate into the repository
+
+What this does:
+Moves you into the project folder so you can start working.
+cd ICELOGS-LOGSMOVER.logsmover
+
+✅ Verify Repository
+Check remote connection
+
+What this does:
+Confirms your local repo is linked to the correct remote repository.
+git remote -v
+
 🔄 4. Working with Repositories (ICELOGS-LOGSMOVER)
 
 This section explains how to create branches, make changes, and merge code using our standard workflow.
