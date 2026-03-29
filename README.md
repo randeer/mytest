@@ -1,3 +1,43 @@
+2. 🔑 Setting Up GitHub Access
+2.1 Generate SSH Key
+Run the following command in Git Bash / Terminal:
+ssh-keygen -t ed25519 -C "your_email@example.com"
+👉 When prompted:
+Press Enter to accept default file location
+Optionally set a passphrase (recommended)
+
+2.2 Add SSH Key to SSH Agent
+Start the SSH agent:
+eval "$(ssh-agent -s)"
+Add your SSH private key:
+ssh-add ~/.ssh/id_ed25519
+
+2.3 Add SSH Key to GitHub
+Copy your public key:
+cat ~/.ssh/id_ed25519.pub
+Go to GitHub:
+Click your profile → Settings
+Navigate to SSH and GPG keys
+Click New SSH key
+Fill in:
+Title: (e.g., Work Laptop)
+Key: Paste the copied key
+Click Add SSH key
+
+2.4 Test SSH Connection
+Run:
+ssh -T git@github.com
+👉 Expected output:
+Hi username! You've successfully authenticated...
+
+2.5 Configure Git (Required)
+Set your identity:
+git config --global user.name "Your Name"
+git config --global user.email "your_email@example.com"
+Check config:
+git config --list
+
+----------------------------------------------------------
 🔐 Clone a Repository
 
 Option 1: Clone using SSH (Recommended)
@@ -69,6 +109,7 @@ Check remote connection
 What this does:
 Confirms your local repo is linked to the correct remote repository.
 git remote -v
+--------------------------------------------------------
 
 🔄 4. Working with Repositories (ICELOGS-LOGSMOVER)
 
@@ -215,3 +256,59 @@ git checkout master
 
 Step 2: Pull Latest Changes
 git pull origin master
+-------------------------------------------------------------
+
+5. 🛠️ Common Issues
+5.1 SSH key errors (permission denied)
+Happens when your SSH key is missing or not added to your account.
+Add the key to your Git hosting account, then test
+
+5.2 Authentication issues (HTTPS/token)
+Happens when your credentials or token are wrong or expired.
+git config --global credential.helper store
+Then try pushing again and enter your username + token.
+
+or reset credentials
+git credential reject https://github.com
+
+or use SSH instead
+git remote set-url origin git@github.com:username/repo.git
+
+5.3 Merge conflicts
+Happens when Git can’t automatically combine changes.
+🔁 Using Rebase for Merge Conflicts
+git pull --rebase origin main
+
+⚠️ If Conflicts Happen During Rebase
+Git will pause and ask you to fix them.
+Then Fix the conflicted files manually like below;
+git add .
+git rebase --continue
+If more conflicts appear, repeat the steps
+
+If You Want to Cancel Rebase
+git rebase --abort
+
+5.4 Branch issues
+Happens when switching, creating, or tracking branches incorrectly.
+
+
+5.5 Sync issues (pull/push errors)
+Happens when your local repo is behind or out of sync.
+git pull origin main --rebase
+Then push:
+git push origin main
+If push is rejected:
+git push --force
+⚠️ Use force push carefully (can overwrite history).
+-------------------------------------------------------------
+
+6. 📏 Best Practices & Policies
+Branching rules (no direct commits to main)
+Commit message standards
+Pull request guidelines
+Security practices (no secrets in code)
+Repository naming conventions
+
+
+
