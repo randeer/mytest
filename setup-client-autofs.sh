@@ -237,5 +237,5 @@ COMMON CAUSES & NEXT STEPS (diagnostic guidance printed for engineer)
 
 ================================================================================
 EOF
-
+2
 echo "Done. If hr3 cannot create/read files the most-likely immediate reason is: hr3 is NOT a member of group 'nfs-hr' while the share allows writes only to owner/group (2775). See the 'COMMON CAUSES' section above for fixes."
