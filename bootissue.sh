@@ -10,3 +10,12 @@ else
     echo "$entry" | sudo tee -a /etc/fstab > /dev/null
     echo "Entry added to /etc/fstab."
 fi
+
+####ILHAProxy Logs#####
+smb://c1z-dv-pdosh01-001.adm.intcx.net/morelogs/ >> /var/opt/logsrepo/logs/prod/c1z-dv-pdosh01-001/
+smb://c1z-dv-pdosh01-002.adm.intcx.net/morelogs/ >> /var/opt/logsrepo/logs/prod/c1z-dv-pdosh01-002/
+
+####ILHAProxy Logs#####
+smb://c4z-pr-pdosh01-001.adm.intcx.net/morelogs/ >> /var/opt/logsrepo/logs/prod/c4z-pr-pdosh01-001/
+smb://c4z-pr-pdosh01-002.adm.intcx.net/morelogs/ >> /var/opt/logsrepo/logs/prod/c4z-pr-pdosh01-002/
+
