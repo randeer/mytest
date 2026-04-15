@@ -5,3 +5,6 @@ smb://c1z-dv-pdosh01-002.adm.intcx.net/morelogs/ >> /var/opt/logsrepo/logs/prod/
 ####ILHAProxy Logs#####
 smb://c4z-pr-pdosh01-001.adm.intcx.net/morelogs/ >> /var/opt/logsrepo/logs/prod/c4z-pr-pdosh01-001/
 smb://c4z-pr-pdosh01-002.adm.intcx.net/morelogs/ >> /var/opt/logsrepo/logs/prod/c4z-pr-pdosh01-002/
+
+
+3
