@@ -145,3 +145,6 @@ exportfs -v
 
 echo "Done. /srv/db and /srv/hr are exported to ${CLIENT_NET}."
 echo "Check client(s) by running on a client: showmount -e <server1-ip> or mount the share."
+
+
+1
