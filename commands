@@ -105,6 +105,16 @@ No immediate action is required other than monitoring for a new Datto release th
 
 Please let me know if you’d like me to contact Datto Support to confirm their expected update timeline for this issue.
 
+
+####ILHAProxy Logs#####
+smb://c1z-dv-pdosh01-001.adm.intcx.net/morelogs/ >> /var/opt/logsrepo/logs/prod/c1z-dv-pdosh01-001/
+smb://c1z-dv-pdosh01-002.adm.intcx.net/morelogs/ >> /var/opt/logsrepo/logs/prod/c1z-dv-pdosh01-002/
+
+####ILHAProxy Logs#####
+smb://c4z-pr-pdosh01-001.adm.intcx.net/morelogs/ >> /var/opt/logsrepo/logs/prod/c4z-pr-pdosh01-001/
+smb://c4z-pr-pdosh01-002.adm.intcx.net/morelogs/ >> /var/opt/logsrepo/logs/prod/c4z-pr-pdosh01-002/
+
+
 Kind regards,
 
 https://nvd.nist.gov/vuln/detail/CVE-2025-55315?utm_source=chatgpt.com
