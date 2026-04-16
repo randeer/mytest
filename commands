@@ -1,3 +1,5 @@
+
+7788
 $runtimeRoot = "C:\ProgramData\CentraStage\AEMAgent\.net.runtime\8.0.19\shared"
 Test-Path "$runtimeRoot\Microsoft.AspNetCore.App" -PathType Container
 # If it exists, list versions:
