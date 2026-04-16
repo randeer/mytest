@@ -1,5 +1,5 @@
 #!/bin/bash
-
+'[;[;[
 # NFS entry to add
 entry="192.168.4.100:/mnt/db nfs defaults 0 0"
 
