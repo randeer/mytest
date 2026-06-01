@@ -3,3 +3,33 @@ Hi, this is from github copilot CLI
 
 
 බලු කපුටු දානය
+
+https://aka.ms/getTSSv2
+
+
+
+2. Place the TSSv2 on the affected machine and unzip it. It would be easier for you if you placed the file on a easy access place like C:\ drive. (f.e C:\Tools)
+
+3. Open a PowerShell with elevated privileges and navigate to the TSSv2 folder (f.e, cd C:\Tools\TSSv2).
+
+4. Run the command .\TSSv2.ps1 -CollectLog DND_SetupReport
+
+5. An End user License Agreement window will pop up. You must read it and click accept.
+
+6. It will take about 15 to 20 minutes to run.
+
+7. Note that it is normal for some errors to be displayed as some files or registry entries will not exist on some systems.
+
+8. When the process is finished you will find in C:\drive a folder named MS_DATA.
+
+9. Please upload the zip file inside MS_DATA to the workspace:
+---------
+Entrant Name:
+LALANGA, PODDIWALA MARAGE RANDEER
+Confirmation Number:
+20244XJVWFB6WV8F
+Year of Birth:
+1992
+Digital Signature:
+7B99B0EDCF3CB260B9BBB3CA8C5F1ECE65C4FDEC
+
