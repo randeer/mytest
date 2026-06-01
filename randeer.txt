@@ -24,12 +24,3 @@ https://aka.ms/getTSSv2
 
 9. Please upload the zip file inside MS_DATA to the workspace:
 ---------
-Entrant Name:
-LALANGA, PODDIWALA MARAGE RANDEER
-Confirmation Number:
-20244XJVWFB6WV8F
-Year of Birth:
-1992
-Digital Signature:
-7B99B0EDCF3CB260B9BBB3CA8C5F1ECE65C4FDEC
-
