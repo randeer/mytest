@@ -1,0 +1,337 @@
+1. Git Overview
+
+Git is a distributed version control system used to track changes in source code and enable multiple developers to collaborate on the same project safely.
+Instead of storing files directly, Git records snapshots of changes over time. This allows developers to review history, revert changes, and work on new features without affecting the main project.
+
+Key Concepts
+
+Repository (Repo)
+A repository is a project tracked by Git. It contains the project files and the full history of changes.
+
+Local Repository
+The copy of the repository stored on a developer’s computer. Developers make changes, commits, and branches locally before sharing them.
+
+Remote Repository
+A repository hosted on a server (such as Bitbucket or GitHub) that allows teams to share and collaborate on code.
+
+Commit
+A commit records a snapshot of changes in the repository. Each commit has a unique ID and includes information about what was changed.
+
+Branch
+A branch is an independent line of development. Developers create branches to work on features or bug fixes without affecting the main branch.
+
+Clone
+Cloning creates a copy of a remote repository on a local machine so developers can start working on the project.
+
+Pull
+Pulling retrieves the latest changes from the remote repository and updates the local repository.
+
+Push
+Pushing sends local commits to the remote repository so other team members can access them.
+-----------------------------------------------------------
+2. Git Workflow
+
+This section describes the standard workflow developers should follow when working with Git.
+The example below uses a sample repository called sample-app.
+
+1) Clone the Repository
+Cloning creates a local copy of the remote repository.
+
+Command:
+
+git clone https://github.com/example/sample-app.git
+
+Example Output:
+
+Cloning into 'sample-app'...
+remote: Enumerating objects: 25, done.
+remote: Counting objects: 100% (25/25), done.
+Receiving objects: 100% (25/25), done.
+Resolving deltas: 100% (8/8), done.
+----------
+
+2) Navigate to the Repository
+Move into the project directory after cloning.
+
+Command:
+
+cd sample-app
+
+Check repository status:
+
+git status
+
+Example Output:
+
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+----------
+
+3) Create a Feature Branch
+
+Developers should not work directly on the main branch.
+Create a new branch for features or fixes.
+
+Command:
+
+git checkout -b feature/login-page
+
+Example Output:
+
+Switched to a new branch 'feature/login-page'
+----------
+
+4) Make Changes
+
+Edit or add files in the project.
+
+Example file creation:
+
+touch login.html
+
+Stage the changes:
+
+git add login.html
+----------
+
+5) Commit Changes
+
+Commit records a snapshot of the staged changes.
+
+Command:
+
+git commit -m "Add login page"
+
+Example Output:
+
+[feature/login-page 3a5f1d2] Add login page
+ 1 file changed, 10 insertions(+)
+ create mode 100644 login.html
+----------
+
+6) Sync with Remote Before Push
+
+Before pushing changes, update the branch with the latest remote updates.
+
+Command:
+
+git fetch origin
+git pull origin main
+
+Example Output:
+
+From https://github.com/example/sample-app
+ * branch            main       -> FETCH_HEAD
+Already up to date.
+----------
+
+7) Push Changes to Remote
+
+Push the local branch to the remote repository.
+
+Command:
+
+git push origin feature/login-page
+
+Example Output:
+
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Writing objects: 100% (3/3), 300 bytes | 300.00 KiB/s, done.
+remote: Create a pull request for 'feature/login-page'
+To https://github.com/example/sample-app.git
+ * [new branch]      feature/login-page -> feature/login-page
+----------
+
+8) Create a Pull Request (PR)
+
+After pushing the branch, create a Pull Request in the repository hosting platform (GitHub, GitLab, or Bitbucket).
+
+Steps:
+
+Go to the repository in the web interface.
+
+Select Create Pull Request.
+
+Choose the source branch (feature/login-page).
+
+Add description and reviewers.
+----------
+
+9) Code Review and Merge
+
+Team members review the Pull Request.
+
+Possible actions:
+
+Approve the changes
+
+Request modifications
+
+Run automated CI checks
+
+After approval, the branch is merged into the main branch.
+----------
+
+10) Update Local Repository
+
+After the Pull Request is merged, update your local repository.
+
+Command:
+
+git checkout main
+git pull origin main
+
+Example Output:
+
+Switched to branch 'main'
+Updating 8a7d3c2..9b4f2d1
+Fast-forward
+ login.html | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+----------
+
+11) Clean Old Branches
+
+After merging, delete the local feature branch to keep the repository clean.
+
+Command:
+
+git branch -d feature/login-page
+
+Example Output:
+
+Deleted branch feature/login-page (was 3a5f1d2).
+
+To remove deleted remote branches from your local list:
+
+git fetch --prune
+----------
+
+Summary
+Following this workflow ensures that developers:
+Work in isolated feature branches
+Keep their code synchronized with the remote repository
+Collaborate through Pull Requests
+Maintain a clean and organized Git history
+
+-------------------------------------------------------------------------------
+3. Best Practices
+
+1) Always Work on a Feature Branch
+Avoid committing directly to the main or master branch.
+Create a separate branch for each feature, bug fix, or task.
+
+Example:
+
+git checkout -b feature/user-authentication
+
+This ensures the main branch remains stable and production-ready.
+
+
+2) Pull Latest Changes Before Starting Work
+Before making changes, always update your local repository to ensure you are working with the latest code.
+
+git pull origin main
+
+This helps prevent conflicts and outdated code.
+
+
+3) Commit Small and Logical Changes
+Make small, meaningful commits instead of large commits containing many unrelated changes.
+
+Good practice:
+
+git commit -m "Add validation for login form"
+
+Avoid vague commit messages such as:
+
+git commit -m "update"
+
+
+4) Write Clear Commit Messages
+A good commit message clearly describes the purpose of the change.
+
+Recommended format:
+
+[TKT-123] Add login API validation
+
+Clear commit messages make it easier to review changes and understand project history.
+
+
+5) Sync With Remote Frequently
+Regularly fetch or pull updates from the remote repository to avoid branch divergence.
+
+git fetch origin
+git pull origin main
+
+This reduces the chances of large merge conflicts later.
+
+6) Review Changes Before Committing
+
+Before committing, review the changes to ensure only intended modifications are included.
+
+git status
+git diff
+
+This helps prevent accidental commits of unnecessary files.
+
+7) Use Pull Requests for Code Integration
+
+All code changes should be merged through a Pull Request (PR).
+This allows team members to review the code and ensures quality before merging.
+
+Pull Requests help with:
+
+Code review
+
+Automated testing
+
+Maintaining code quality
+
+
+8) Avoid Force Push on Shared Branches
+
+Using force push can overwrite other developers' work.
+
+Example (avoid using on shared branches):
+
+git push --force
+
+If necessary, use the safer option:
+
+git push --force-with-lease
+
+
+9) Keep the Repository Clean
+
+Delete unused branches after they are merged.
+
+git branch -d feature/login-page
+
+This keeps the repository organized and easier to navigate.
+
+
+10) Never Commit Sensitive Information
+
+Avoid committing confidential data such as:
+
+Passwords
+
+API keys
+
+Private keys
+
+Configuration secrets
+
+Use .gitignore to prevent sensitive files from being committed.
+
+Example:
+
+.env
+*.key
+*.pem
+
+
