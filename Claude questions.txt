@@ -1,0 +1,10 @@
+1 - Copy and paste readme.md
+2 - Then copy and paste error and what is the reason
+3 - How many steps this script has and tell me which step is failing this script
+4 - do you able to find in this script what codes does it uses to resolve or try to get that IP address?
+5 - if I want to find IP address of iLO or iDrac what I am doing is From a management server (m2z-mg-ililo-01): dig ilo.intcx.net AXFR | grep <serial-number>
+does this dig command or anything similler to that uses inside this script (with c4-pr-ifilo-01.intcx.net or m2z-mg-ililo-01)
+Any sort of dig command like one
+beucase, manual guide say to do that way, no that "Derives an iLO lookup host"
+6 - if I use "dig ilo.intcx.net AXFR | grep <serial-number>", I can manualy test this command and see the output Ex: - iLO-8KXR753.ilo.intcx.net. 300 IN A 10.20.30.45 likethat can we have manual way to find out if this "Derives an iLO lookup host" method that this script uses to get IP address of the iLO or iDrac?
+7 - The existing method that script uses is very hard? why can't the script uses simple "dig" command like manual method to get IP address of iLO or iDrac, then after that it can next steps, then everything happy
