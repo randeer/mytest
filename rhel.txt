@@ -31,3 +31,9 @@ done
 
 echo
 echo "Search complete."
+
+
+backup format -
+*.bak: compressed binary format
+*.sql: plaintext dump
+*.tar: tarball
