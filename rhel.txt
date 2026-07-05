@@ -1,0 +1,3 @@
+Welcome to this open lab experience for Red Hat Enterprise Linux.
+The system displayed beside this text is a Red Hat Enterprise Linux 10 system registered with Subscription Manager. An unprivileged user also exists on the system.
+You can use these credentials to login to the cockpit web ui.
