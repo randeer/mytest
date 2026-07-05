@@ -16,3 +16,18 @@ For example, on Red Hat you'll search:
 /run
 
 These are virtual filesystems and aren't useful for this task.
+
+
+#!/bin/bash
+
+echo "Searching for Git repositories..."
+echo
+
+find / -type d -name ".git" 2>/dev/null | while read -r gitdir
+do
+    repo=$(dirname "$gitdir")
+    echo "$repo"
+done
+
+echo
+echo "Search complete."
