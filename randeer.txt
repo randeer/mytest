@@ -1,12 +1,1 @@
-Work Completed:
-
-Reviewed the client's KB article "HT: Perform CEB Essential Forms Updates" to understand the update procedure.
-Verified the update notification email from CEB and confirmed it was the official July 2026 Essential Forms Update.
-Accessed the download link provided in the CEB email.
-Confirmed that the current 2026 download only provides efinstaller.exe (the previous KB referenced an additional allcacty.exe, which is not included in the current release).
-Downloaded and extracted efinstaller.exe.
-Verified that the installer extracted a new installation folder named ef2607a.
-Reviewed the "HT: Install CEB Essential Forms" KB and confirmed the installation files are stored under:
-\\NAC-AZ-FP01\WXApps\ClientApps\CEB\
-Confirmed the extracted folder naming convention (ef2607a) aligns with the existing version folder structure described in the KB.
-Preparing to stage the new installation folder on the shared installation repository and continue with the update process during the approved maintenance window.
+https://ceb.com/products/all-counties-essential-forms-package-download-page/
