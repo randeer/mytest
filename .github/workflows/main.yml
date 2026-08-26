@@ -11,7 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Test GitHub Token
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Test GITHUB_TOKEN
         run: |
           echo "Testing GITHUB_TOKEN..."
           gh repo view
