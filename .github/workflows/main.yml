@@ -17,6 +17,9 @@ jobs:
       - name: Test GITHUB_TOKEN
         run: |
           echo "Testing GITHUB_TOKEN..."
+          echo "---------------------------------"
           gh repo view
+          echo "-----------------------"
+          echo "${{ vars.NAME }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
