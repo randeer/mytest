@@ -1,0 +1,19 @@
+name: Test GITHUB_TOKEN
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-token:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Test GitHub Token
+        run: |
+          echo "Testing GITHUB_TOKEN..."
+          gh repo view
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
